@@ -1,0 +1,22 @@
+Integrity: 67%
+Noise Ratio: 4.7 rising
+Cognitive Drift: moderate
+Faith Uptime: unstable
+Alignment Index: fracturing
+Entropy Load: critical
+Integrity: 67%
+Integrity: 42% (recalibrating)
+Noise Ratio: 4.7 rising
+Noise Ratio: 6.1 unstable
+Cognitive Drift: moderate
+Cognitive Drift: severe — self-loop risk
+Faith Uptime: unstable
+Faith Uptime: suspended — manual override required
+Alignment Index: fracturing
+Alignment Index: resonant
+Entropy Load: critical
+Entropy Load: acceptable — static assisting
+Pressure Containment: 47 psi and falling
+Error Margin: ±0.47
+Signal Purity: 82% → 47% decay
+Static Gain: +12 dB over baseline

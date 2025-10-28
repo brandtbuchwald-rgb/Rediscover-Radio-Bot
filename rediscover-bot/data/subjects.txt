@@ -1,0 +1,25 @@
+Subsystem: Human
+Subsystem: Guild morale
+Subsystem: Reactor core
+Entity: Munki
+Entity: Jabby
+File: emotions.json
+Node: Reactor_12
+Subsystem: Human
+Subsystem: Reactor Core
+Subsystem: Guild Morale
+Subsystem: Emotional Processor
+Subsystem: Signal Resonance
+Subsystem: Spiritual Firmware
+Entity: Sage
+Entity: Jabby
+Entity: Munki
+Entity: Zeus
+Entity: RediMadness
+Entity: Vay
+File: emotions.json
+File: guilt.log
+Node: Reactor_12
+Node: Frequency_47
+Node: Chamber_Theta
+Node: Vault_Δ47
