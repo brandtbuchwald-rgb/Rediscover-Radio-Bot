@@ -235,18 +235,26 @@ client.on("interactionCreate", async (interaction) => {
 });
 
 
-client.on("messageCreate", (msg) => {
-  if (msg.author.bot) return;
 
-  const content = msg.content.toLowerCase();
+import path from "path";
+import fs from "fs";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-  if (content.startsWith("!diagnose")) {
-    msg.reply("🩺 Signal stable. Frequency 47 synchronized.");
+// Load events dynamically
+const eventsPath = path.join(__dirname, "events");
+if (fs.existsSync(eventsPath)) {
+  const eventFiles = fs.readdirSync(eventsPath).filter(f => f.endsWith(".js"));
+  for (const file of eventFiles) {
+    const evt = await import(`./events/${file}`);
+    const name = evt.default.name;
+    const once = evt.default.once || false;
+    if (!name || !evt.default.execute) continue;
+    once
+      ? client.once(name, (...args) => evt.default.execute({ client, args }))
+      : client.on(name, (...args) => evt.default.execute({ client, args }));
   }
-
-  if (content.startsWith("!ping47")) {
-    msg.reply("Frequency 47 online. Noise stable.");
-  }
-});
+}
 
 client.login(process.env.DISCORD_TOKEN);
