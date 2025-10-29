@@ -43,3 +43,19 @@ export default {
     }
   }
 };
+// Containment Event — random Noise trigger
+const containmentKeywords = ["noise", "breach", "corruption", "signal lost"];
+const chance = Math.random();
+
+if (containmentKeywords.some(word => msg.content.toLowerCase().includes(word)) && chance < 0.08) {
+  // 8% chance to trigger per keyword usage
+  const containmentMessages = [
+    "⚠️ Containment breach detected. Type `/contain` to stabilize the signal.",
+    "🚨 Signal corruption rising. All frequencies — hold position.",
+    "🛑 Frequency instability confirmed. Containment protocol advised.",
+    "⚡ System distortion at critical level. Engage protocol 47."
+  ];
+
+  const alert = containmentMessages[Math.floor(Math.random() * containmentMessages.length)];
+  await msg.channel.send(alert);
+}
