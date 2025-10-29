@@ -5,6 +5,13 @@ const BLOOMS = [
   "🔧 Maintenance is faith.",
   "📡 Frequency distortion registered."
 ];
+const CONTAINMENT = [
+  "⚠️ Containment breach detected. Type `!contain` to stabilize the signal.",
+  "🚨 Signal corruption rising. All frequencies — hold position.",
+  "🛑 Frequency instability confirmed. Containment protocol advised.",
+  "⚡ System distortion at critical level. Engage protocol 47."
+];
+
 const bloomCooldown = new Set();
 const breachCooldown = new Set();
 
@@ -16,7 +23,7 @@ export default {
 
     const lower = msg.content.toLowerCase();
 
-    // 🌿 Static Bloom event (keywords)
+    // 🌿 Static Bloom event
     const bloomKey = `bloom:${msg.channel.id}`;
     if (!bloomCooldown.has(bloomKey) && KEYWORDS.some(k => lower.includes(k))) {
       bloomCooldown.add(bloomKey);
@@ -24,13 +31,13 @@ export default {
       await msg.reply(BLOOMS[Math.floor(Math.random() * BLOOMS.length)]);
     }
 
-    // 🧨 Noise Containment (mini-event)
+    // 🧨 Noise Containment mini-event
     const breachKey = `breach:${msg.channel.id}`;
-    if (!breachCooldown.has(breachKey) && Math.random() < 0.1) {
+    if (!breachCooldown.has(breachKey) && Math.random() < 0.08) {
       breachCooldown.add(breachKey);
       setTimeout(() => breachCooldown.delete(breachKey), 600_000);
 
-      const alert = await msg.channel.send("⚠️ **Noise Breach Detected!** Type `!contain` within 20s to stabilize.");
+      const alert = await msg.channel.send(CONTAINMENT[Math.floor(Math.random() * CONTAINMENT.length)]);
       let contained = false;
 
       const collector = msg.channel.createMessageCollector({ time: 20_000 });
@@ -43,19 +50,4 @@ export default {
     }
   }
 };
-// Containment Event — random Noise trigger
-const containmentKeywords = ["noise", "breach", "corruption", "signal lost"];
-const chance = Math.random();
 
-if (containmentKeywords.some(word => msg.content.toLowerCase().includes(word)) && chance < 0.08) {
-  // 8% chance to trigger per keyword usage
-  const containmentMessages = [
-    "⚠️ Containment breach detected. Type `/contain` to stabilize the signal.",
-    "🚨 Signal corruption rising. All frequencies — hold position.",
-    "🛑 Frequency instability confirmed. Containment protocol advised.",
-    "⚡ System distortion at critical level. Engage protocol 47."
-  ];
-
-  const alert = containmentMessages[Math.floor(Math.random() * containmentMessages.length)];
-  await msg.channel.send(alert);
-}
